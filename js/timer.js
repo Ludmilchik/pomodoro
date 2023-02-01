@@ -27,7 +27,7 @@ if (state.timeLeft <= 0) {
     alarm();
 
     if (state.status === 'work'){
-        state.activeTodo.pomodoro += 1;
+        state.activeTodo.pomodoro += 10;
 
         if (state.activeTodo.pomodoro % state.count) {
             state.status = 'break'
