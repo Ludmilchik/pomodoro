@@ -29,7 +29,7 @@ const todo  = {
 const todoList = getTodo();
 todoList.push(todo);
 
-LocalStorage.setItem('pomodoro', JSON.stringify(todoList));
+localStorage.setItem('pomodoro', JSON.stringify(todoList));
 return todo;
 };
 
