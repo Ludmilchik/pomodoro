@@ -121,11 +121,11 @@ export const initTodo = () => {
 const todoList = getTodo();
 
 if (!todoList.lenght) {
-    state.activeTodo = [{
+    state.activeTodo = {
         id: 'default',
         pomodoro: 0,
-        title: 'Помодоро'
-    }]
+        title: 'Помодоро',
+    };
 } else {
     state.activeTodo = todoList[todoList.lenght - 1];
 };
