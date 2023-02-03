@@ -2,7 +2,7 @@ import { changeActiveBtn, stop } from "./control.js";
 import { state } from "./state.js"
 
 const titleElem = document.querySelector('.title');
-const countElem = document.querySelector('.count__num');
+const countElem = document.querySelector('.count_num');
 const todoListElem = document.querySelector('.todo__list');
 
 const li = document.createElement('li');
