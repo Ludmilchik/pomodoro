@@ -1,3 +1,4 @@
+import { changeActiveBtn, stop } from "./control.js";
 import { state } from "./state.js"
 
 const titleElem = document.querySelector('.title');
@@ -13,7 +14,7 @@ todoAddBtn.textContent = 'Добавить новую задачу';
 li.append(todoAddBtn);
 
 const getTodo = () => {
-   const todoList = JSON.parse(localStorage.getItem('pomodoro') || '[]')
+const todoList = JSON.parse(localStorage.getItem('pomodoro') || '[]')
 
     return todoList;
 }
@@ -58,8 +59,12 @@ todoItemWrapper.append(todoBtn, editBtn, delBtn);
 todoListElem.prepend(todoItem);
 
 todoBtn.addEventListener('click', () => {
-
+state.activeTodo = todo;
+showTodo();
+changeActiveBtn('work');
+stop();
 });
+
 editBtn.addEventListener('click', () => {});
 delBtn.addEventListener('click', () => {});
 
@@ -70,7 +75,6 @@ const renderTodoList = (list) => {
 todoListElem.textContent = '';
 list.forEach(creatTodoListItem);
 todoListElem.append(li);
-
 };
 
 const showTodo = () => {
@@ -90,7 +94,6 @@ if (!todoList.lenght) {
 } else {
     state.activeTodo = todoList[todoList.lenght - 1];
 }
-
 
 showTodo();
 
