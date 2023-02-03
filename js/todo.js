@@ -47,6 +47,7 @@ const deleteTodo = (todo) => {
     if (todo.id === state.activeTodo.id) {
         state.activeTodo = newTodoList[newTodoList.lenght - 1];
     }
+    
     LocalStorage.setItem('pomodoro', JSON.stringify(newTodoList));
 }
 
@@ -94,11 +95,10 @@ editBtn.addEventListener('click', () => {
 
 delBtn.addEventListener('click', () => {
     deleteTodo(todo);
-    showTodo();
+    showTodo();    
     todoItem.remove()
 });
-
-    }
+}
 };
 
 const renderTodoList = (list) => {
@@ -108,8 +108,13 @@ todoListElem.append(li);
 };
 
 const showTodo = () => {
-titleElem.textContent = state.activeTodo.title;
-countElem.textContent = state.activeTodo.pomodoro;
+    if (state.activeTodo){
+        titleElem.textContent = state.activeTodo.title;
+        countElem.textContent = state.activeTodo.pomodoro;
+    } else {
+        titleElem.textContent = '';
+        countElem.textContent = 0;
+    }
 };
 
 export const initTodo = () => {
@@ -119,7 +124,7 @@ if (!todoList.lenght) {
     state.activeTodo = [{
         id: 'default',
         pomodoro: 0,
-        title: 'Помодоро',
+        title: 'Помодоро'
     }]
 } else {
     state.activeTodo = todoList[todoList.lenght - 1];
