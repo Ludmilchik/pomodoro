@@ -1,12 +1,13 @@
 import { state } from "./state.js"
 
 const titleElem = document.querySelector('.title');
+const countElem = document.querySelector('.count__num');
 const todoListElem = document.querySelector('.todo__list');
 
 const li = document.createElement('li');
 li.classList.add('todo__item');
 
-const todoAddBtn = document.createElement('buton');
+const todoAddBtn = document.createElement('button');
 todoAddBtn.classList.add('todo__add');
 todoAddBtn.textContent = 'Добавить новую задачу';
 li.append(todoAddBtn);
@@ -14,7 +15,7 @@ li.append(todoAddBtn);
 const getTodo = () => {
    const todoList = JSON.parse(localStorage.getItem('pomodoro') || '[]')
 
-    return todoList
+    return todoList;
 }
 
 const addTodo = (title) => {
@@ -56,23 +57,25 @@ todoItemWrapper.append(todoBtn, editBtn, delBtn);
 
 todoListElem.prepend(todoItem);
 
-todoBtn.addEventListener('click', () => {});
+todoBtn.addEventListener('click', () => {
+
+});
 editBtn.addEventListener('click', () => {});
 delBtn.addEventListener('click', () => {});
 
     }
-}
+};
 
 const renderTodoList = (list) => {
 todoListElem.textContent = '';
 list.forEach(creatTodoListItem);
 todoListElem.append(li);
 
-}
+};
 
 const showTodo = () => {
 titleElem.textContent = state.activeTodo.title;
-// вывести количество помодорок
+countElem.textContent = state.activeTodo.pomodoro;
 };
 
 export const initTodo = () => {
