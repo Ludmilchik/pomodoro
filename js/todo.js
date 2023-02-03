@@ -24,14 +24,22 @@ const todo  = {
     title,
     pomodoro: 0,
     id: Math.random().toString(16).substring(2,8),
-}
+};
 
 const todoList = getTodo();
 todoList.push(todo);
 
 localStorage.setItem('pomodoro', JSON.stringify(todoList));
 return todo;
-}
+};
+
+const updateTodo = (todo) => {
+    const todoList = getTodo();
+    const todoItem = todoList.find((item) => item.id === todo.id);
+    todoItem.title = todo.title;
+    todoItem.pomodoro = todo.pomodoro;
+    localStorage.setItem('pomodoro', JSON.stringify(todoList));
+};
 
 const creatTodoListItem = (todo) => {
     if (todo.id !== 'defaul') {
@@ -65,7 +73,16 @@ changeActiveBtn('work');
 stop();
 });
 
-editBtn.addEventListener('click', () => {});
+editBtn.addEventListener('click', () => {
+    todo.title = prompt('Название задачи', todo.title);
+    todoBtn.textContent = todo.title;
+    if (todo.id === state.activeTodo.id) {
+        state.activeTodo.title = todo.title;
+    }
+    showTodo();
+    updateTodo(todo);
+});
+
 delBtn.addEventListener('click', () => {});
 
     }
@@ -93,10 +110,8 @@ if (!todoList.lenght) {
     }]
 } else {
     state.activeTodo = todoList[todoList.lenght - 1];
-}
-
+};
 showTodo();
-
 renderTodoList(todoList);
 
 todoAddBtn.addEventListener('click', () => {
