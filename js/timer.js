@@ -1,6 +1,7 @@
 import { alarm } from "./alarm.js";
 import { changeActiveBtn } from "./control.js";
 import { state } from "./state.js";
+import { showTodo, updateTodo } from "./todo.js";
 import { addZero } from "./util.js";
 
 const minutesElem = document.querySelector('.time__minutes');
@@ -13,21 +14,17 @@ export const showTime = (seconds) => {
 };
 
 export const startTimer = () => {
-    state.timeLeft--;
+    
+    state.timerId = setInterval(() => {
+        state.timeLeft--;
+        showTime(state.timeLeft);
 
-//отобразить на странице
-showTime(state.timeLeft);
-
-if (state.timeLeft > 0 && state.isActive) {
-    state.timerId = setTimeout(startTimer, 1000);
+        if (state.timeLeft > 0 && state.isActive) {
+    return;
 }
-
-if (state.timeLeft <= 0) {
-    //сигнализировать, что время вышло
-    alarm();
-
     if (state.status === 'work'){
-        state.activeTodo.pomodoro += 10;
+        state.activeTodo.pomodoro += 1;
+        updateTodo(state.activeTodo);
 
         if (state.activeTodo.pomodoro % state.count) {
             state.status = 'break'
@@ -39,9 +36,21 @@ if (state.timeLeft <= 0) {
     } else {
         state.status = 'work'
     }
+
+    alarm();
     state.timeLeft = state[state.status] * 60;
     changeActiveBtn(state.status);
+    showTodo();
     startTimer();
+}, 1000)
 }
 
-}
+
+//отобразить на странице
+        // state.timeLeft--;
+        // showTime(state.timeLeft);
+
+// if (state.timeLeft > 0 && state.isActive) {
+//     state.timerId = setTimeout(startTimer, 1000);
+// }
+

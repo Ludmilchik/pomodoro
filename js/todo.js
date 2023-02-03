@@ -33,7 +33,7 @@ LocalStorage.setItem('pomodoro', JSON.stringify(todoList));
 return todo;
 };
 
-const updateTodo = (todo) => {
+export const updateTodo = (todo) => {
     const todoList = getTodo();
     const todoItem = todoList.find((item) => item.id === todo.id);
     todoItem.title = todo.title;
@@ -107,7 +107,7 @@ list.forEach(creatTodoListItem);
 todoListElem.append(li);
 };
 
-const showTodo = () => {
+export const showTodo = () => {
     if (state.activeTodo){
         titleElem.textContent = state.activeTodo.title;
         countElem.textContent = state.activeTodo.pomodoro;
