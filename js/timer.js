@@ -33,7 +33,9 @@ const countdown = new Date().getTime() + state.timeLeft * 1000;
         if (state.timeLeft > 0 && state.isActive) {
     return;
 }
-
+ document.title = title;
+ clearTimeout (state.timerId);
+ 
     if (state.status === 'work'){
         state.activeTodo.pomodoro += 1;
         updateTodo(state.activeTodo);

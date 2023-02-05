@@ -35,6 +35,9 @@ return todo;
 
 export const updateTodo = (todo) => {
     const todoList = getTodo();
+    if (!todoList.lenght) {
+        return;
+    }
     const todoItem = todoList.find((item) => item.id === todo.id);
     todoItem.title = todo.title;
     todoItem.pomodoro = todo.pomodoro;
